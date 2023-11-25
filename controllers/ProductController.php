@@ -1,5 +1,6 @@
 <?php
 require_once '../models/Product.php';
+require_once '../controllers/Helpers/functions.php';
 
 class ProductController
 {
@@ -12,10 +13,9 @@ class ProductController
 
     public function index()
     {
-
         $data = $this->productModel->all();
-        $view = 'products/index.php';
-        include '../views/layout.php';
+        return view(page: 'products/index.php',  data: $data);
+    }
     }
 
 }
