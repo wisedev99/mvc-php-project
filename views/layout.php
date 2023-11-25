@@ -19,7 +19,7 @@
         </nav>
     </header>
     <main>
-        <?php include $view; ?>
+        <?php include $page; ?>
     </main>
 
     <footer>
