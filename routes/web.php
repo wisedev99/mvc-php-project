@@ -10,25 +10,48 @@ $routes = [
     '/' => 'ProductController@index',
     '/products' => 'ProductController@allProducts',
     '/category' => 'ProductController@getProductByCat',
+    '/product/{id}' => 'ProductController@getProductById',
 ];
 
+// Find a matching route
 foreach ($routes as $route => $controllerAction) {
-    [$controllerName, $actionName] = explode('@', $controllerAction);
+    // Check if the route contains dynamic parameters
+    if (strpos($route, '{') !== false) {
+        // Convert the dynamic route to a regular expression
+        $pattern = preg_replace('/{[^}]+}/', '([^/]+)', $route);
+        $pattern = str_replace('/', '\/', $pattern);
 
-    if ($url === $route) {
-        $controllerClassName = $controllerName;
+        // Check if the URL matches the pattern
+        if (preg_match('/^' . $pattern . '$/', $url, $matches)) {
+            // Extract the captured parameter values
+            $params = array_slice($matches, 1);
 
-        $controller = new $controllerClassName();
-        // $routeParams = [];
+            // Extract the controller name and action name
+            [$controllerName, $actionName] = explode('@', $controllerAction);
 
-        // dont need to it because we already get request name in controller line: #35
-        // if ($route === '/category') {
-        //     $categoryName = trim($urlParts[1], '/');
-        //     $routeParams[] = $categoryName;
-        // }
+            // Create an instance of the controller
+            $controller = new $controllerName();
 
-        $controller->$actionName();
+            // Call the corresponding action on the controller
+            $controller->$actionName(...$params);
 
-        break;
+            // Stop processing further routes
+            break;
+        }
+    } else {
+        // Handle static routes as before
+        if ($url === $route) {
+            // Extract the controller name and action name
+            [$controllerName, $actionName] = explode('@', $controllerAction);
+
+            // Create an instance of the controller
+            $controller = new $controllerName();
+
+            // Call the corresponding action on the controller
+            $controller->$actionName();
+
+            // Stop processing further routes
+            break;
+        }
     }
 }

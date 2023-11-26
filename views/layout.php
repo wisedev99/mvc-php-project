@@ -31,7 +31,7 @@
             <nav class="bg-white border-green-200 bg-white">
                 <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 relative">
                     <a href="/" class="flex items-center space-x-3 ">
-                        <img src="./assets/images/header_logo.png" class="" alt="Header Logo">
+                        <img src="/assets/images/header_logo.png" class="" alt="Header Logo">
                     </a>
                     <button @click="openMenu()" class="md:hidden" v-if="!menu" type="button">
                         <div class="flex justify-center items-center">
@@ -53,16 +53,16 @@
                                 <a href="/" class="block py-2 px-3 text-white bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 " aria-current="page">Home</a>
                             </li>
                             <li>
-                                <a href="#" class="block py-2 px-3 text-green-900 rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white">All Items</a>
+                                <a href="/products" class="block py-2 px-3 text-green-900 rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white">All Items</a>
                             </li>
                             <li>
-                                <a href="#" class="block py-2 px-3 text-green-900 rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Daydate</a>
+                                <a href='/category?name="Day-Date"' class=" block py-2 px-3 text-green-900 rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Daydate</a>
                             </li>
                             <li>
-                                <a href="#" class="block py-2 px-3 text-green-900 rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Dayjust Pearl</a>
+                                <a href='/category?name="Date Just Pearl"' class="block py-2 px-3 text-green-900 rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Dayjust Pearl</a>
                             </li>
                             <li>
-                                <a href="#" class="block py-2 px-3 text-green-900 rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Date Just</a>
+                                <a href='/category?name="Date Just"' class="block py-2 px-3 text-green-900 rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Date Just</a>
                             </li>
                             <li>
                                 <button class="bg-[#127849] transition duration-500 ease-in-out text-white border border-[#127849] hover:text-[#127849] hover:bg-transparent rounded-xl px-4 py-1.5">Contact us</button>
@@ -85,16 +85,16 @@
                         <a href="/" class="block py-2 px-3 text-green-900  text-center rounded md:bg-transparent md:text-green-700 md:p-0 " aria-current="page">Home</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 px-3 text-green-900 text-center rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white">All Items</a>
+                        <a href="/products" class="block py-2 px-3 text-green-900 text-center rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white">All Items</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 px-3 text-green-900  text-center rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Daydate</a>
+                        <a href='/category?name="Day-Date"' class="block py-2 px-3 text-green-900  text-center rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Daydate</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 px-3 text-green-900 text-center rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Dayjust Pearl</a>
+                        <a href='/category?name="Date Just Pearl"' class="block py-2 px-3 text-green-900 text-center rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Dayjust Pearl</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 px-3 text-green-900 text-center rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Date Just</a>
+                        <a href='/category?name="Date Just"' class="block py-2 px-3 text-green-900 text-center rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Date Just</a>
                     </li>
                     <li>
                         <a href="#" class="block py-2 px-3 text-green-900 text-center rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Contact us</a>

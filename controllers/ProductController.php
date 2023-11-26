@@ -38,4 +38,10 @@ class ProductController
         $data = $this->productModel->get('item', 'pid', $cat[0]->id);
         return view(page: 'products/items.php',  data: $data);
     }
+
+    public function getProductById($id)
+    {
+        $data = $this->productModel->get('item', 'id', $id);
+        return view(page: 'products/item.php',  data: $data);
+    }
 }
