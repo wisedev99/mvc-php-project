@@ -8,8 +8,8 @@
     <title>MVC project</title>
 </head>
 
-<body id="app" class="bg-[#f8f8f8]">
-    <div class="max-w-[90%] mx-auto">
+<body class="bg-[#f8f8f8]">
+    <div id="app" class=" mx-auto">
         <header class="fixed w-full top-0 left-0 right-0 h-auto">
             <nav class="bg-white border-green-200 bg-white">
                 <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 relative">
@@ -56,22 +56,25 @@
             </nav>
         </header>
 
-        <main class="mt-24 bg-green-200">
+        <main class="mt-20 max-w-screen-xl mx-auto px-4 ">
             <?php include $page; ?>
         </main>
-
         <footer>
             footer
         </footer>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script>
+
+    <script type="module">
         const {
             createApp,
             ref
         } = Vue
 
         createApp({
+            components: {
+                'text-component': TextComponent,
+            },
             setup() {
                 const menu = ref(false)
 
