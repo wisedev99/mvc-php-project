@@ -40,29 +40,8 @@
             </div>
         </div>
     </div>
-    <div class="max-w-4xl mx-auto my-10">
-        
+
+    <div class="max-w-3xl mx-auto my-10">
+        <slider-component></slider-component>
     </div>
 </div>
-
-<script>
-    const SliderComponent = {
-        template: `
-
-    `,
-
-        data() {
-            return {
-                message: 'Hello, Vue!'
-            }
-        },
-        mounted() {
-            console.log('MyComponent mounted')
-        },
-        methods: {
-            myFunction() {
-                // Function logic here
-            }
-        }
-    }
-</script>
