@@ -19,13 +19,15 @@ foreach ($routes as $route => $controllerAction) {
         $controllerClassName = $controllerName;
 
         $controller = new $controllerClassName();
-        $routeParams = [];
-        if ($route === '/category') {
-            $categoryName = trim($url, '/');
-            $routeParams[] = $categoryName;
-        }
+        // $routeParams = [];
 
-        $controller->$actionName(...$routeParams);
+        // dont need to it because we already get request name in controller line: #35
+        // if ($route === '/category') {
+        //     $categoryName = trim($urlParts[1], '/');
+        //     $routeParams[] = $categoryName;
+        // }
+
+        $controller->$actionName();
 
         break;
     }
