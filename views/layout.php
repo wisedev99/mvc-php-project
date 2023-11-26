@@ -10,6 +10,10 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> -->
     <title>MVC project</title>
     <style>
+        html {
+            scroll-behavior: smooth
+        }
+
         body {
             font-family: Helvetica, sans-serif, regular;
             font-size: 16px;
@@ -22,8 +26,8 @@
 </head>
 
 <body class="bg-[#f8f8f8]">
-    <div id="app" class="mx-auto mb-32">
-        <header class="fixed w-full top-0 left-0 right-0 h-auto">
+    <div id="app" class="mx-auto ">
+        <header class="fixed w-full top-0 left-0 right-0 h-auto z-50">
             <nav class="bg-white border-green-200 bg-white">
                 <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 relative">
                     <a href="/" class="flex items-center space-x-3 ">
@@ -44,7 +48,7 @@
                         </svg>
                     </button>
                     <div class=" w-full h-screen md:h-auto z-50 md:block md:w-auto" :class="{'hidden': !menu}" id="navbar-default">
-                        <ul class="font-medium h-full bg-white flex flex-col p-4 md:p-0  border border-green-100 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white ">
+                        <ul class="font-medium h-full bg-white flex flex-col p-4 md:p-0  md:flex-row md:items-center md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white ">
                             <li>
                                 <a href="/" class="block py-2 px-3 text-white bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 " aria-current="page">Home</a>
                             </li>
@@ -61,7 +65,7 @@
                                 <a href="#" class="block py-2 px-3 text-green-900 rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Date Just</a>
                             </li>
                             <li>
-                                <button class="bg-[#127849] transition duration-500 ease-in-out text-white  hover:text-[#127849] hover:bg-transparent rounded-xl px-4 py-1.5">Contact us</button>
+                                <button class="bg-[#127849] transition duration-500 ease-in-out text-white border border-[#127849] hover:text-[#127849] hover:bg-transparent rounded-xl px-4 py-1.5">Contact us</button>
                             </li>
                         </ul>
                     </div>
@@ -72,8 +76,37 @@
         <main class="py-20 max-w-screen-xl bg-white mx-auto">
             <?php include $page; ?>
         </main>
-        <footer class="py-20">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quod culpa libero eos facere facilis fugit quis sequi tenetur dolore ex, quisquam dolor maxime quae ratione sint eaque quo quam?
+        <footer class="py-20 bg-white  mx-auto">
+            <div class="w-full space-y-8 flex flex-col justify-center items-center">
+                <img src="/assets/images/footer_logo.jpg" class="order-2 md:order-1 w-24 " alt="">
+                <ul class="font-medium h-full divide-y order-1 md:order-2  md:divide-y-0 divide-slate-200 w-full  md:bg-white flex flex-col p-4 md:p-0  md:flex-row md:items-center justify-center md:py-2 md:border md:border-gray-200 md:space-x-8 rtl:space-x-reverse md:mt-0  md:bg-white ">
+                    <li></li>
+                    <li>
+                        <a href="/" class="block py-2 px-3 text-green-900  text-center rounded md:bg-transparent md:text-green-700 md:p-0 " aria-current="page">Home</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-2 px-3 text-green-900 text-center rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white">All Items</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-2 px-3 text-green-900  text-center rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Daydate</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-2 px-3 text-green-900 text-center rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Dayjust Pearl</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-2 px-3 text-green-900 text-center rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Date Just</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-2 px-3 text-green-900 text-center rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Contact us</a>
+                    </li>
+                    <li></li>
+
+                </ul>
+                <button @click="scrollToTop()" class="order-3 rounded-full bg-[#127849] p-4 text-white hover:bg-transparent border border-[#127849] hover:text-[#127849] transition duration-500 ease-in-out"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                    </svg>
+                </button>
+            </div>
         </footer>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -134,8 +167,17 @@
                     methods: {
                         initializeSwiper() {
                             this.swiper = new Swiper('.swiper', {
-                                slidesPerView: 3,
+                                slidesPerView: 2,
                                 spaceBetween: 20,
+                                breakpoints: {
+                                    // when window width is >= 320px
+                                    996: {
+                                        slidesPerView: 3,
+                                        spaceBetween: 20
+                                    }
+
+                                },
+
                                 autoplay: {
                                     delay: 5000,
                                 },
@@ -162,7 +204,8 @@
                             if (this.swiper) {
                                 this.swiper.slidePrev();
                             }
-                        }
+                        },
+
                     }
                 },
                 'grid-component': GridComponent,
@@ -173,9 +216,14 @@
                 function openMenu() {
                     menu.value = menu.value ? false : true
                 }
+
+                function scrollToTop() {
+                    window.scrollTo(0, 0);
+                }
                 return {
                     menu,
-                    openMenu
+                    openMenu,
+                    scrollToTop
                 }
             }
         }).mount('#app')
