@@ -6,10 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>MVC project</title>
+    <style>
+        body {
+            font-family: Helvetica, sans-serif, regular;
+            font-size: 16px;
+        }
+    </style>
 </head>
 
 <body class="bg-[#f8f8f8]">
-    <div id="app" class=" mx-auto">
+    <div id="app" class="mx-auto mb-32">
         <header class="fixed w-full top-0 left-0 right-0 h-auto">
             <nav class="bg-white border-green-200 bg-white">
                 <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 relative">
@@ -33,7 +39,7 @@
                     <div class=" w-full h-screen md:h-auto z-50 md:block md:w-auto" :class="{'hidden': !menu}" id="navbar-default">
                         <ul class="font-medium h-full bg-white flex flex-col p-4 md:p-0  border border-green-100 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white ">
                             <li>
-                                <a href="#" class="block py-2 px-3 text-white bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 " aria-current="page">Home</a>
+                                <a href="/" class="block py-2 px-3 text-white bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 " aria-current="page">Home</a>
                             </li>
                             <li>
                                 <a href="#" class="block py-2 px-3 text-green-900 rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white">All Items</a>
@@ -48,7 +54,7 @@
                                 <a href="#" class="block py-2 px-3 text-green-900 rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Date Just</a>
                             </li>
                             <li>
-                                <a href="#" class="block py-2 px-3 text-green-900 rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Contact Us</a>
+                                <button class="bg-[#127849] transition duration-500 ease-in-out text-white  hover:text-[#127849] hover:bg-transparent rounded-xl px-4 py-1.5">Contact us</button>
                             </li>
                         </ul>
                     </div>
@@ -56,11 +62,17 @@
             </nav>
         </header>
 
-        <main class="mt-20 max-w-screen-xl mx-auto px-4 ">
+        <main class="py-20 max-w-screen-xl bg-white mx-auto">
             <?php include $page; ?>
         </main>
-        <footer>
-            footer
+        <footer class="py-20">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quod culpa libero eos facere facilis fugit quis sequi tenetur dolore ex, quisquam dolor maxime quae ratione sint eaque quo quam?
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quod culpa libero eos facere facilis fugit quis sequi tenetur dolore ex, quisquam dolor maxime quae ratione sint eaque quo quam?
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quod culpa libero eos facere facilis fugit quis sequi tenetur dolore ex, quisquam dolor maxime quae ratione sint eaque quo quam?
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quod culpa libero eos facere facilis fugit quis sequi tenetur dolore ex, quisquam dolor maxime quae ratione sint eaque quo quam?
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quod culpa libero eos facere facilis fugit quis sequi tenetur dolore ex, quisquam dolor maxime quae ratione sint eaque quo quam?
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quod culpa libero eos facere facilis fugit quis sequi tenetur dolore ex, quisquam dolor maxime quae ratione sint eaque quo quam?
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quod culpa libero eos facere facilis fugit quis sequi tenetur dolore ex, quisquam dolor maxime quae ratione sint eaque quo quam?
         </footer>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -73,7 +85,8 @@
 
         createApp({
             components: {
-                'text-component': TextComponent,
+                'text-component': SliderComponent,
+                'grid-component': GridComponent,
             },
             setup() {
                 const menu = ref(false)
