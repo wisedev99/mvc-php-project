@@ -35,14 +35,15 @@ class Product
         }, $array);
     }
 
-    public function get($key, $itemvalue, $withMedia = false)
+    public function get($type, $key, $itemvalue)
     {
-        $query = "SELECT * FROM products WHERE $key = :itemvalue";
+        $query = "SELECT * FROM products WHERE type = :itemType AND $key = :itemvalue";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':itemvalue', $itemvalue);
+        $stmt->bindParam(':itemType', $type);
         $stmt->execute();
         // ONE FUNCTION FOR TWO ACTIONS
-        if ($withMedia) {
+        if ($type == 'item') {
             return $this->addMediaUrl($stmt->fetchAll(PDO::FETCH_ASSOC));
         } else {
             return $stmt->fetchAll(PDO::FETCH_OBJ);

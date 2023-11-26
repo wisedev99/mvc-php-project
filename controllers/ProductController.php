@@ -34,8 +34,8 @@ class ProductController
     {
         $category = $_REQUEST['name'];
 
-        $cat = $this->productModel->get('small_title', json_decode($category));
-        $data = $this->productModel->get('pid', $cat[0]->id, true);
+        $cat = $this->productModel->get('cat', 'small_title', json_decode($category));
+        $data = $this->productModel->get('item', 'pid', $cat[0]->id);
         return view(page: 'products/items.php',  data: $data);
     }
 }
