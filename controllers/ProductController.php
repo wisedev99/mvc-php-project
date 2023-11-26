@@ -13,9 +13,7 @@ class ProductController
 
     public function index()
     {
-        $data = $this->productModel->all();
-        return view(page: 'products/index.php',  data: $data);
+        $data = $this->productModel->getProducts();
+        return view(page: 'products/home.php',  data: $data);
     }
-    }
-
 }
