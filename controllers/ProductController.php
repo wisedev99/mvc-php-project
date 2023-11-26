@@ -16,4 +16,26 @@ class ProductController
         $data = $this->productModel->getProducts();
         return view(page: 'products/home.php',  data: $data);
     }
+
+    public function allProducts()
+    {
+        $data = $this->productModel->getProducts();
+        return view(page: 'products/items.php',  data: $data);
+    }
+    // get product by parent id // by group  //
+    // public function getById()
+    // {
+    //     $itemId = $_GET['id'];
+
+    //     $data = $this->productModel->getById('id', $itemId);
+    //     return view(page: 'products/item.php',  data: $data);
+    // }
+    public function getProductByCat()
+    {
+        $category = $_REQUEST['name'];
+
+        $cat = $this->productModel->get('small_title', json_decode($category));
+        $data = $this->productModel->get('pid', $cat[0]->id, true);
+        return view(page: 'products/items.php',  data: $data);
+    }
 }
