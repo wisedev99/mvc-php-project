@@ -5,11 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> -->
     <title>MVC project</title>
     <style>
         body {
             font-family: Helvetica, sans-serif, regular;
             font-size: 16px;
+        }
+
+        .swiper {
+            height: 240px;
         }
     </style>
 </head>
@@ -67,17 +74,13 @@
         </main>
         <footer class="py-20">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quod culpa libero eos facere facilis fugit quis sequi tenetur dolore ex, quisquam dolor maxime quae ratione sint eaque quo quam?
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quod culpa libero eos facere facilis fugit quis sequi tenetur dolore ex, quisquam dolor maxime quae ratione sint eaque quo quam?
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quod culpa libero eos facere facilis fugit quis sequi tenetur dolore ex, quisquam dolor maxime quae ratione sint eaque quo quam?
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quod culpa libero eos facere facilis fugit quis sequi tenetur dolore ex, quisquam dolor maxime quae ratione sint eaque quo quam?
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quod culpa libero eos facere facilis fugit quis sequi tenetur dolore ex, quisquam dolor maxime quae ratione sint eaque quo quam?
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quod culpa libero eos facere facilis fugit quis sequi tenetur dolore ex, quisquam dolor maxime quae ratione sint eaque quo quam?
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quod culpa libero eos facere facilis fugit quis sequi tenetur dolore ex, quisquam dolor maxime quae ratione sint eaque quo quam?
         </footer>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
     <script type="module">
+        import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
+
         const {
             createApp,
             ref
@@ -85,7 +88,83 @@
 
         createApp({
             components: {
-                'text-component': SliderComponent,
+                SliderComponent: {
+                    template: `
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" v-for="slide in slides" :key="slide.id" :style="'background-color: ' + slide.backgroundColor">
+              <img :src="slide.img" />
+              </div>
+            </div>
+
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev" @click="prevSlide"></div>
+            <div class="swiper-button-next" @click="nextSlide"></div>
+            <div class="swiper-scrollbar"></div>
+          </div>
+        `,
+                    data() {
+                        return {
+                            swiper: null,
+                            slides: [{
+                                    id: 1,
+                                    img: '/assets/images/slider/keep-exploring-rolex-collection_portrait.jpg',
+                                },
+
+
+                                {
+                                    id: 2,
+                                    img: '/assets/images/slider/keep-exploring-new-2019-watches_portrait.jpg'
+                                },
+                                {
+                                    id: 3,
+                                    img: '/assets/images/slider/keep-exploring-contact-us_portrait.jpg'
+                                },
+                                {
+                                    id: 4,
+                                    img: '/assets/images/slider/keep-exploring-landing-page_portrait.jpg'
+                                },
+
+                            ]
+                        };
+                    },
+                    mounted() {
+                        this.initializeSwiper();
+                    },
+                    methods: {
+                        initializeSwiper() {
+                            this.swiper = new Swiper('.swiper', {
+                                slidesPerView: 3,
+                                spaceBetween: 20,
+                                autoplay: {
+                                    delay: 5000,
+                                },
+
+                                navigation: {
+                                    nextEl: '.swiper-button-next',
+                                    prevEl: '.swiper-button-prev'
+                                },
+                                pagination: {
+                                    el: '.swiper-pagination',
+                                    clickable: true
+                                },
+                                scrollbar: {
+                                    el: '.swiper-scrollbar'
+                                }
+                            });
+                        },
+                        nextSlide() {
+                            if (this.swiper) {
+                                this.swiper.slideNext();
+                            }
+                        },
+                        prevSlide() {
+                            if (this.swiper) {
+                                this.swiper.slidePrev();
+                            }
+                        }
+                    }
+                },
                 'grid-component': GridComponent,
             },
             setup() {
