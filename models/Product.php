@@ -22,20 +22,39 @@ class Product
         $query = "SELECT * FROM products WHERE type = 'item'";
         $stmt = $this->conn->query($query);
 
+        return $this->addMediaUrl($stmt->fetchAll(PDO::FETCH_ASSOC));
+    }
+
+    public function addMediaUrl($array)
+    {
         return array_map(function ($product) {
             if ($product['type'] == 'item') {
                 $product['media_url'] = "/store/" . $product['model_number'] . ".png"; // Replace 'new_key' and 'new_value' with your desired key-value pair
             }
             return $product;
-        }, $stmt->fetchAll(PDO::FETCH_ASSOC));
+        }, $array);
     }
 
-    public function getTaskById($taskId)
+    public function get($key, $itemvalue, $withMedia = false)
     {
-        $query = "SELECT * FROM tasks WHERE id = :taskId";
+        $query = "SELECT * FROM products WHERE $key = :itemvalue";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':taskId', $taskId);
+        $stmt->bindParam(':itemvalue', $itemvalue);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        // ONE FUNCTION FOR TWO ACTIONS
+        if ($withMedia) {
+            return $this->addMediaUrl($stmt->fetchAll(PDO::FETCH_ASSOC));
+        } else {
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+    }
+
+    public function getById($key, $itemvalue, $withMedia)
+    {
+        $query = "SELECT * FROM products WHERE $key = :itemvalue";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':itemvalue', $itemvalue);
+        $stmt->execute();
+        return $this->addMediaUrl($stmt->fetchAll(PDO::FETCH_ASSOC));
     }
 }
