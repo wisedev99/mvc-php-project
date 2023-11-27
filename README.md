@@ -47,8 +47,8 @@ Copy code
 ## Usage
 
 - Modify the PHP files in the appropriate folders (models, views, controllers) to add or customize functionality for your specific project.
-- Update the Vue.js components in the `public/js` directory to enhance the front-end interactivity.
-- Customize the styles using Tailwind CSS utility classes or by editing the CSS files in the `public/css` directory.
+<!-- - Update the Vue.js components in the `public/js` directory to enhance the front-end interactivity. -->
+<!-- - Customize the styles using Tailwind CSS utility classes or by editing the CSS files in the `public/css` directory. -->
 
 ## Contributing
 
