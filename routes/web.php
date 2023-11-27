@@ -11,6 +11,7 @@ $routes = [
     '/products' => 'ProductController@allProducts',
     '/category' => 'ProductController@getProductByCat',
     '/product/{id}' => 'ProductController@getProductById',
+    '/all-product-with-children' => 'ProductController@getItemsWithChildren',
 ];
 
 // Find a matching route

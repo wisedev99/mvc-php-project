@@ -44,4 +44,12 @@ class ProductController
         $data = $this->productModel->get('item', 'id', $id);
         return view(page: 'products/item.php',  data: $data);
     }
+
+    public function getItemsWithChildren()
+    {
+        $parent = $this->productModel->getById('id', 1);
+        $data = $this->productModel->getChildProducts($parent);
+
+        return view(page: 'products/all.php',  data: $data);
+    }
 }

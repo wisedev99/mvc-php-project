@@ -50,12 +50,29 @@ class Product
         }
     }
 
-    public function getById($key, $itemvalue, $withMedia)
+    public function getById($key, $itemValue)
     {
-        $query = "SELECT * FROM products WHERE $key = :itemvalue";
+        $query = "SELECT * FROM products WHERE $key = :ID";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':itemvalue', $itemvalue);
+        $stmt->bindParam(':ID', $itemValue);
         $stmt->execute();
         return $this->addMediaUrl($stmt->fetchAll(PDO::FETCH_ASSOC));
+    }
+
+    public function getChildProducts($parentProducts)
+    {
+        $result = [];
+        foreach ($parentProducts as $parentProduct) {
+
+            $childProducts = $this->getById('pid', $parentProduct['id']);
+
+            if (count($childProducts) > 0) {
+                $parentProduct['children'] = $this->getChildProducts($childProducts);
+            }
+
+            $result[] = $parentProduct;
+        }
+
+        return $result;
     }
 }
