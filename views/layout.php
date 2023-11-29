@@ -31,7 +31,7 @@
             <nav class="bg-white border-green-200 bg-white">
                 <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 relative">
                     <a href="/" class="flex items-center space-x-3 ">
-                        <img src="/assets/images/header_logo.png" class="" alt="Header Logo">
+                        <img src="/public/assets/images/header_logo.png" class="" alt="Header Logo">
                     </a>
                     <button @click="openMenu()" class="md:hidden" v-if="!menu" type="button">
                         <div class="flex justify-center items-center">
@@ -78,7 +78,7 @@
         </main>
         <footer class="py-20 bg-white  mx-auto">
             <div class="w-full space-y-8 flex flex-col justify-center items-center">
-                <img src="/assets/images/footer_logo.jpg" class="order-2 md:order-1 w-24 " alt="">
+                <img src="/public/assets/images/footer_logo.jpg" class="order-2 md:order-1 w-24 " alt="">
                 <ul class="font-medium h-full divide-y order-1 md:order-2  md:divide-y-0 divide-slate-200 w-full  md:bg-white flex flex-col p-4 md:p-0  md:flex-row md:items-center justify-center md:py-2 md:border md:border-gray-200 md:space-x-8 rtl:space-x-reverse md:mt-0  md:bg-white ">
                     <li></li>
                     <li>
@@ -141,21 +141,21 @@
                             swiper: null,
                             slides: [{
                                     id: 1,
-                                    img: '/assets/images/slider/keep-exploring-rolex-collection_portrait.jpg',
+                                    img: '/public/assets/images/slider/keep-exploring-rolex-collection_portrait.jpg',
                                 },
 
 
                                 {
                                     id: 2,
-                                    img: '/assets/images/slider/keep-exploring-new-2019-watches_portrait.jpg'
+                                    img: '/public/assets/images/slider/keep-exploring-new-2019-watches_portrait.jpg'
                                 },
                                 {
                                     id: 3,
-                                    img: '/assets/images/slider/keep-exploring-contact-us_portrait.jpg'
+                                    img: '/public/assets/images/slider/keep-exploring-contact-us_portrait.jpg'
                                 },
                                 {
                                     id: 4,
-                                    img: '/assets/images/slider/keep-exploring-landing-page_portrait.jpg'
+                                    img: '/public/assets/images/slider/keep-exploring-landing-page_portrait.jpg'
                                 },
 
                             ]
