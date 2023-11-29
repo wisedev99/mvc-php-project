@@ -1,5 +1,5 @@
 <?php
-define('DB_HOST', '127.0.0.1');
-define('DB_NAME', 'rollex');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_HOST', '192.249.121.150');
+define('DB_USER', 'progtest4_roll');
+define('DB_PASS', 'Sn9+EonVaC7x');
+define('DB_NAME', 'progtest4_rollex');

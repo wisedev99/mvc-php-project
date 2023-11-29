@@ -14,13 +14,13 @@ class ProductController
     public function index()
     {
         $data = $this->productModel->getProducts();
-        return view(page: 'products/home.php',  data: $data);
+        return view('products/home.php',  $data);
     }
 
     public function allProducts()
     {
         $data = $this->productModel->getProducts();
-        return view(page: 'products/items.php',  data: $data);
+        return view('products/items.php',  $data);
     }
     // get product by parent id // by group  //
     // public function getById()
@@ -36,13 +36,13 @@ class ProductController
 
         $cat = $this->productModel->get('cat', 'small_title', json_decode($category));
         $data = $this->productModel->get('item', 'pid', $cat[0]->id);
-        return view(page: 'products/items.php',  data: $data);
+        return view('products/items.php', $data);
     }
 
     public function getProductById($id)
     {
         $data = $this->productModel->get('item', 'id', $id);
-        return view(page: 'products/item.php',  data: $data);
+        return view('products/item.php',  $data);
     }
 
     public function getItemsWithChildren()
@@ -50,6 +50,6 @@ class ProductController
         $parent = $this->productModel->getById('id', 1);
         $data = $this->productModel->getChildProducts($parent);
 
-        return view(page: 'products/all.php',  data: $data);
+        return view('products/all.php',  $data);
     }
 }

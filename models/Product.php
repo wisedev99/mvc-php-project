@@ -29,7 +29,7 @@ class Product
     {
         return array_map(function ($product) {
             if ($product['type'] == 'item') {
-                $product['media_url'] = "/store/" . $product['model_number'] . ".png"; // Replace 'new_key' and 'new_value' with your desired key-value pair
+                $product['media_url'] = "/public/store/" . $product['model_number'] . ".png"; // Replace 'new_key' and 'new_value' with your desired key-value pair
             }
             return $product;
         }, $array);
