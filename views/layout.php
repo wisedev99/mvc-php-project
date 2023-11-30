@@ -123,19 +123,19 @@
             components: {
                 SliderComponent: {
                     template: `
-          <div class="swiper">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide" v-for="slide in slides" :key="slide.id" :style="'background-color: ' + slide.backgroundColor">
-              <img :src="slide.img" />
-              </div>
-            </div>
+                            <div class="swiper">
+                                <div class="swiper-wrapper">
+                                <div class="swiper-slide" v-for="slide in slides" :key="slide.id" :style="'background-color: ' + slide.backgroundColor">
+                                <img :src="slide.img" />
+                                </div>
+                                </div>
 
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-prev" @click="prevSlide"></div>
-            <div class="swiper-button-next" @click="nextSlide"></div>
-            <div class="swiper-scrollbar"></div>
-          </div>
-        `,
+                                <div class="swiper-pagination"></div>
+                                <div class="swiper-button-prev" @click="prevSlide"></div>
+                                <div class="swiper-button-next" @click="nextSlide"></div>
+                                <div class="swiper-scrollbar"></div>
+                            </div>
+                              `,
                     data() {
                         return {
                             swiper: null,
@@ -208,7 +208,148 @@
 
                     }
                 },
-                'grid-component': GridComponent,
+
+                GridComponent: {
+
+                    template: `
+                            <div class="mx-auto max-w-2xl text-center">
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 gap-y-20">
+                            <a v-for="item in items" :key="item.id" :href="'/product/'+item.id">
+
+                            <div>
+                            <img :src="item.media_url"/>
+                            <h4 class="font-bold text-md" >
+                            Rolex
+                            </h4>
+                            <h1 class="text-md font-bold uppercase">{{item.small_title}}</h1>
+                            </div>
+                            </a>
+                            </div>
+                            </div>
+                                `,
+
+                    data() {
+                        return {
+                            items: (<?php echo json_encode($data) ?>),
+                            page: (<?php echo json_encode($page) ?>),
+                            message: 'Vue component in .php, 26.11.23! American company !'
+                        }
+                    },
+                    mounted() {
+                        console.log('MyComponent mounted', this.page)
+                    },
+                    methods: {
+                        myFunction() {
+                            // Function logic here
+                        }
+                    }
+                },
+
+                EditComponent: {
+
+                    template: `
+                    <div v-for="item in items" :key="item.id">
+  <div class="flex flex-col flex-col-reverse md:flex-row max-w-4xl mx-auto">
+            <div class="w-1/2 p-4">
+                <h2 class="text-2xl font-bold">{{item.large_title}}</h2>
+  <h3 class="text-lg font-bold">{{item.small_title}}</h3>
+                <p class="mb-4 font-bold">{{item.description}}</p>
+                <p><span class="font-bold">Model Number:</span>{{item.model_number}}</p>
+                <p><span class="font-bold">Model Case:</span> {{item.model_case}}</p>
+                <p><span class="font-bold">Water Resistance:</span> {{item.water_resistance}}</p>
+                <div class="flex items-center"><span class="font-bold">Movement:</span> <p v-if="!editDialog">{{item.movement}}</p>
+            <input  v-if="editDialog" v-model="form.movement" type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Movement" required>
+         </div>
+                  <div class="flex items-center"><span class="font-bold">Caliber:</span> <p v-if="!editDialog">{{item.caliber}}</p>
+            <input  v-if="editDialog" v-model="form.caliber" type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Caliber" required>
+         </div>
+                    <div class="flex items-center"><span class="font-bold">Power Reserve:</span> <p v-if="!editDialog">{{item.power_reserve}}</p>
+            <input  v-if="editDialog" v-model="form.power_reserve" type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Power Reserve" required>
+         </div>
+                <p><span class="font-bold">Bracelet:</span> {{item.bracelet}}</p>
+                <p><span class="font-bold">Dial:</span> {{item.dial}}</p>
+                <p><span class="font-bold">Price:</span> {{item.price}}</p>
+            </div>
+            <div class="w-1/2 p-4 text-center">
+                <img :src="item.media_url" alt="Watch Image" class="h-auto max-w-full">
+            </div>
+        </div>
+<div class="flex justify-start max-w-4xl mx-auto space-x-2">
+<button :disabled="editDialog" @click="edit(item.id)" class="bg-orange-500 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed">Edit</button>
+<button :disabled="!editDialog" @click="save" class="bg-[#127849] transition duration-500 ease-in-out text-white border border-[#127849] hover:text-[#127849] hover:bg-transparent rounded-xl px-4 py-1.5 disabled:opacity-50 disabled:cursor-not-allowed">Save</button>
+</div>
+        </div>`,
+
+                    data() {
+                        return {
+                            items: [],
+                            page: (<?php echo json_encode($page) ?>),
+                            message: 'Vue component in .php, 26.11.23! American company !',
+                            form: {
+                                movement: '',
+                                caliber: '',
+                                power_reserve: ''
+                            },
+                            editDialog: false
+                        }
+                    },
+
+
+                    mounted() {
+                        const data = '<?php echo json_encode($data); ?>';
+                        this.changeItem(JSON.parse(data));
+                        console.log('MyComponent mounted', this.page)
+                    },
+                    methods: {
+                        changeItem(data) {
+                            this.items = data
+                        },
+                        edit(id) {
+                            this.editDialog = true
+                            const item = this.items.find((item) => item.id == id)
+                            this.form.movement = item.movement
+                            this.form.caliber = item.caliber
+                            this.form.id = item.id
+                            this.form.power_reserve = item.power_reserve
+                        },
+                        save() {
+                            this.editDialog = false;
+
+                            var xhr = new XMLHttpRequest();
+                            var endpoint = `/api/watch/edit/${this.form.id}`;
+
+                            xhr.open('POST', endpoint);
+                            xhr.setRequestHeader('Content-Type', 'application/json');
+
+                            // ...
+
+                            xhr.onreadystatechange = () => {
+                                if (xhr.readyState === 4) {
+                                    if (xhr.status === 200) {
+                                        console.log('Response:', xhr.responseText);
+
+                                        try {
+                                            var response = JSON.parse(xhr.responseText);
+
+                                            this.changeItem(JSON.parse(xhr.responseText)); // Corrected function call
+                                        } catch (error) {
+                                            console.log('Error parsing JSON:', error);
+                                        }
+                                    } else {
+                                        console.log('Error: ' + xhr.status);
+                                    }
+                                }
+                            };
+
+
+
+                            xhr.send(JSON.stringify(this.form));
+                        }
+
+
+                    }
+                }
+
             },
             setup() {
                 const menu = ref(false)
