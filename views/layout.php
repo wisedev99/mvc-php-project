@@ -249,7 +249,7 @@
 
                     template: `
                     <div v-for="item in items" :key="item.id">
-  <div class="flex flex-col flex-col-reverse md:flex-row max-w-4xl mx-auto">
+  <div class="flex flex-col flex-col-reverse items-center max-w-4xl md:flex-row mx-auto">
             <div class="w-1/2 p-4">
                 <h2 class="text-2xl font-bold">{{item.large_title}}</h2>
   <h3 class="text-lg font-bold">{{item.small_title}}</h3>
