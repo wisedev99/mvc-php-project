@@ -53,7 +53,7 @@
                                 <a href="/" class="block py-2 px-3 text-white bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 " aria-current="page">Home</a>
                             </li>
                             <li>
-                                <a href="/products" class="block py-2 px-3 text-green-900 rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white">All Items</a>
+                                <a href="/products" class="block py-2 px-3 text-green-900 rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0">All Items</a>
                             </li>
                             <li>
                                 <a href='/category?name="Day-Date"' class=" block py-2 px-3 text-green-900 rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 ">Daydate</a>
@@ -257,14 +257,15 @@
                 <p><span class="font-bold">Model Number:</span>{{item.model_number}}</p>
                 <p><span class="font-bold">Model Case:</span> {{item.model_case}}</p>
                 <p><span class="font-bold">Water Resistance:</span> {{item.water_resistance}}</p>
-                <div class="flex items-center"><span class="font-bold">Movement:</span> <p v-if="!editDialog">{{item.movement}}</p>
-            <input  v-if="editDialog" v-model="form.movement" type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Movement" required>
+                <div @mouseover="edit('movement')"@mouseout="save(item.id,'movement')" class="flex items-center pr-4"><span class="font-bold">Movement:</span> <p v-if="!editDialog.movement" class="text-sm rounded-lg  block p-1.5  ">{{item.movement}}</p>
+            <input  v-if="editDialog.movement" v-model="item.movement" type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Movement" required>
          </div>
-                  <div class="flex items-center"><span class="font-bold">Caliber:</span> <p v-if="!editDialog">{{item.caliber}}</p>
-            <input  v-if="editDialog" v-model="form.caliber" type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Caliber" required>
+                  <div @mouseover="edit('caliber')" @mouseout="save(item.id, 'caliber')" class="flex items-center pr-4"><span class="font-bold">Caliber:</span> <p v-if="!editDialog.caliber" class="text-sm rounded-lg  block p-1.5  ">{{item.caliber}}</p>
+            <input  v-if="editDialog.caliber" v-model="item.caliber" type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Caliber" required>
          </div>
-                    <div class="flex items-center"><span class="font-bold">Power Reserve:</span> <p v-if="!editDialog">{{item.power_reserve}}</p>
-            <input  v-if="editDialog" v-model="form.power_reserve" type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Power Reserve" required>
+                    <div  @mouseover="edit('power_reserve')" @mouseout="save(item.id, 'power_reserve')" class="flex items-center pr-4"><span class="font-bold">Power Reserve:</span> <p v-if="!editDialog.power_reserve" class="text-sm rounded-lg  block p-1.5  ">{{item.power_reserve}}</p>
+            <input  v-if="editDialog.power_reserve" v-model="item.power_reserve" type="text" id=""
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Power Reserve" required>
          </div>
                 <p><span class="font-bold">Bracelet:</span> {{item.bracelet}}</p>
                 <p><span class="font-bold">Dial:</span> {{item.dial}}</p>
@@ -275,8 +276,6 @@
             </div>
         </div>
 <div class="flex justify-start max-w-4xl mx-auto space-x-2">
-<button :disabled="editDialog" @click="edit(item.id)" class="bg-orange-500 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed">Edit</button>
-<button :disabled="!editDialog" @click="save" class="bg-[#127849] transition duration-500 ease-in-out text-white border border-[#127849] hover:text-[#127849] hover:bg-transparent rounded-xl px-4 py-1.5 disabled:opacity-50 disabled:cursor-not-allowed">Save</button>
 </div>
         </div>`,
 
@@ -290,7 +289,11 @@
                                 caliber: '',
                                 power_reserve: ''
                             },
-                            editDialog: false
+                            editDialog: {
+                                movement: false,
+                                power_reserve: false,
+                                caliber: false
+                            }
                         }
                     },
 
@@ -304,16 +307,19 @@
                         changeItem(data) {
                             this.items = data
                         },
-                        edit(id) {
-                            this.editDialog = true
+                        edit(key) {
+                            this.editDialog[key] = true
+
+                        },
+                        save(id, key) {
+                            this.editDialog[key] = false
                             const item = this.items.find((item) => item.id == id)
                             this.form.movement = item.movement
                             this.form.caliber = item.caliber
                             this.form.id = item.id
                             this.form.power_reserve = item.power_reserve
-                        },
-                        save() {
-                            this.editDialog = false;
+
+                            // this.editDialog = false;
 
                             var xhr = new XMLHttpRequest();
                             var endpoint = `/api/watch/edit/${this.form.id}`;
