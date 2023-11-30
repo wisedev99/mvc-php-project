@@ -52,4 +52,24 @@ class ProductController
 
         return view('products/all.php',  $data);
     }
+
+    public function update($id)
+    {
+        header('Content-Type: application/json');
+
+        // Handle the incoming request
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Retrieve the JSON data from the request body
+            $requestData = json_decode(file_get_contents('php://input'), true);
+
+
+
+            $this->productModel->update($id, $requestData);
+            echo  json_encode($this->productModel->getById('id', $id));
+        } else {
+            // Invalid request method
+            http_response_code(405); // Method Not Allowed
+            echo json_encode(['error' => 'Invalid request method']);
+        }
+    }
 }

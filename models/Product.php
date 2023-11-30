@@ -75,4 +75,18 @@ class Product
 
         return $result;
     }
+
+    public function update($id, $updateData)
+    {
+        $sql = "UPDATE products SET movement = :movement, caliber = :caliber, power_reserve = :power_reserve WHERE id = :id";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':movement', $updateData['movement']);
+        $stmt->bindParam(':caliber', $updateData['caliber']);
+        $stmt->bindParam(':power_reserve', $updateData['power_reserve']);
+
+        $stmt->bindParam(':id', $id);
+
+        return $stmt->execute();
+    }
 }
