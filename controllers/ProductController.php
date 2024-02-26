@@ -33,10 +33,13 @@ class ProductController
     public function getProductByCat()
     {
         $category = $_REQUEST['name'];
-
-        $cat = $this->productModel->get('cat', 'small_title', json_decode($category));
-        $data = $this->productModel->get('item', 'pid', $cat[0]->id);
-        return view('products/items.php', $data);
+        try {
+            $cat = $this->productModel->get('cat', 'small_title', json_decode($category));
+            $data = $this->productModel->get('item', 'pid', $cat[0]->id);
+            return view('products/items.php', $data);
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
 
     public function getProductById($id)

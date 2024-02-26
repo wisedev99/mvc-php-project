@@ -12,7 +12,7 @@ class Route
     public static function get($route, $controllerAction)
     {
         self::$method = $_SERVER["REQUEST_METHOD"];
-        self::$url = $_SERVER["REQUEST_URI"];
+        self::$url = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
         if (self::$method !== 'GET') {
             throw new Exception('Method not supported');
